@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Forzamos el modo oscuro por defecto para el estilo Jarvis */
+    --background: 220 50% 5%; /* Negro azulado muy profundo */
+    --foreground: 190 100% 85%; /* Texto cyan claro */
+    --card: 220 50% 8%;
+    --card-foreground: 190 100% 85%;
+    --popover: 220 50% 5%;
+    --popover-foreground: 190 100% 85%;
+    --primary: 190 100% 50%; /* Cyan neón Jarvis */
+    --primary-foreground: 220 50% 5%;
+    --secondary: 215 30% 15%; /* Azul opaco para paneles */
+    --secondary-foreground: 190 100% 85%;
+    --muted: 215 30% 15%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 190 100% 25%;
+    --accent-foreground: 190 100% 95%;
+    --destructive: 0 84% 60%; /* Rojo alerta de sistema */
+    --destructive-foreground: 210 40% 98%;
+    --border: 190 100% 25%; /* Bordes cyan semi transparentes */
+    --input: 190 100% 25%;
+    --ring: 190 100% 50%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-mono antialiased;
+    /* Efecto de fondo de rejilla tecnológica sutil */
+    background-image: radial-gradient(circle at center, rgba(0, 255, 255, 0.03) 0%, transparent 100%);
+  }
+}
+
+/* Clases utilitarias personalizadas para el efecto "Glassmorphism" y brillo */
+@layer utilities {
+  .jarvis-panel {
+    @apply bg-secondary/60 backdrop-blur-md border border-primary/30 shadow-[0_0_15px_rgba(0,255,255,0.1)];
+  }
+  .jarvis-glow {
+    @apply shadow-[0_0_10px_rgba(0,255,255,0.5)];
+  }
+}
