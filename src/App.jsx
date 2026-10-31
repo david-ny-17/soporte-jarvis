@@ -32,6 +32,11 @@ function App() {
   };
   const cambiarFiltro = (nuevoFiltro) => setFiltro(nuevoFiltro);
 
+  const solicitudesFiltradas = solicitudes.filter(solicitud => {
+    if (filtro === 'todas') return true;
+    return solicitud.estado === filtro;
+  });
+
   return (
     <div className="min-h-screen p-4 md:p-8 max-w-7xl mx-auto">
       {/* Cabecera J.A.R.V.I.S */}
@@ -55,9 +60,9 @@ function App() {
         </div>
         
         <div className="lg:col-span-2">
-          {/* Le pasamos la lista de datos y las funciones de acción */}
+          {/* Le pasamos la lista FILTRADA y las funciones de acción */}
           <ListaSolicitudes
-            solicitudes={solicitudes}
+            solicitudes={solicitudesFiltradas} 
             onActualizar={actualizarEstado}
             onEliminar={eliminarSolicitud}
           />
