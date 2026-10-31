@@ -48,3 +48,44 @@
     @apply shadow-[0_0_10px_rgba(0,255,255,0.5)];
   }
 }
+
+/* --- HUD AVANZADO (NIVEL 3) --- */
+@layer utilities {
+  .bg-black-void {
+    background-color: #02060f;
+    background-image: radial-gradient(circle at center, rgba(0, 255, 255, 0.03) 0%, transparent 70%);
+  }
+  
+  /* Efecto de cristal mucho más sutil para no tapar el reactor */
+  .jarvis-glass-naked {
+    @apply bg-black/40 backdrop-blur-sm border border-primary/30 shadow-[0_0_10px_rgba(0,255,255,0.1)];
+  }
+
+  /* Clases para los anillos del reactor */
+  .ring-base {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full;
+  }
+  
+  /* Velocidades de rotación */
+  .spin-slow { animation: spin 20s linear infinite; }
+  .spin-slower { animation: spin 40s linear infinite; }
+  .spin-reverse-slow { animation: spin-reverse 25s linear infinite; }
+  .spin-reverse-fast { animation: spin-reverse 10s linear infinite; }
+}
+
+@keyframes spin-reverse {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Efecto de anillo segmentado brillante (como el centro de tu imagen) */
+.segmented-ring {
+  background: conic-gradient(from 0deg, transparent 0deg 10deg, rgba(0, 255, 255, 0.8) 10deg 20deg, transparent 20deg 30deg, rgba(0, 255, 255, 0.8) 30deg 40deg, transparent 40deg 50deg, rgba(0, 255, 255, 0.8) 50deg 60deg, transparent 60deg 70deg, rgba(0, 255, 255, 0.8) 70deg 80deg, transparent 80deg 90deg, rgba(0, 255, 255, 0.8) 90deg 100deg, transparent 100deg 110deg, rgba(0, 255, 255, 0.8) 110deg 120deg, transparent 120deg 130deg, rgba(0, 255, 255, 0.8) 130deg 140deg, transparent 140deg 150deg, rgba(0, 255, 255, 0.8) 150deg 160deg, transparent 160deg 170deg, rgba(0, 255, 255, 0.8) 170deg 180deg, transparent 180deg 190deg, rgba(0, 255, 255, 0.8) 190deg 200deg, transparent 200deg 210deg, rgba(0, 255, 255, 0.8) 210deg 220deg, transparent 220deg 230deg, rgba(0, 255, 255, 0.8) 230deg 240deg, transparent 240deg 250deg, rgba(0, 255, 255, 0.8) 250deg 260deg, transparent 260deg 270deg, rgba(0, 255, 255, 0.8) 270deg 280deg, transparent 280deg 290deg, rgba(0, 255, 255, 0.8) 290deg 300deg, transparent 300deg 310deg, rgba(0, 255, 255, 0.8) 310deg 320deg, transparent 320deg 330deg, rgba(0, 255, 255, 0.8) 330deg 340deg, transparent 340deg 350deg, rgba(0, 255, 255, 0.8) 350deg 360deg);
+  mask-image: radial-gradient(transparent 65%, black 66%);
+  -webkit-mask-image: radial-gradient(transparent 65%, black 66%);
+}

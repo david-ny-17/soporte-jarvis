@@ -4,7 +4,7 @@ export default function ListaSolicitudes({ solicitudes, onActualizar, onEliminar
   // Recibe el array de 'solicitudes' por props y lo recorre con .map()
   
   return (
-    <div className="jarvis-panel p-6 rounded-lg h-full min-h-[500px]">
+    <div className="jarvis-glass-naked p-6 rounded-lg relative">
       <h2 className="text-xl text-primary border-b border-primary/30 pb-2 mb-4 uppercase tracking-wider font-bold">
         Monitor de Solicitudes ({solicitudes.length})
       </h2>

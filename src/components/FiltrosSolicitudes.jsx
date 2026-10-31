@@ -4,7 +4,7 @@ export default function FiltrosSolicitudes({ filtroActual, onCambiarFiltro }) {
   const opciones = ['todas', 'pendiente', 'en proceso', 'resuelta'];
 
   return (
-    <div className="jarvis-panel p-6 rounded-lg">
+    <div className="jarvis-glass-naked p-6 rounded-lg relative">
       <h2 className="text-xl text-primary border-b border-primary/30 pb-2 mb-4 uppercase tracking-wider font-bold">
         Filtros de Sistema
       </h2>

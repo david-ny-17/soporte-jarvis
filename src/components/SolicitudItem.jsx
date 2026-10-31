@@ -12,7 +12,7 @@ export default function SolicitudItem({ solicitud, onActualizar, onEliminar }) {
   };
 
   return (
-    <div className="border border-border bg-background/50 p-4 rounded-lg flex flex-col gap-3 hover:border-primary/50 transition-colors relative overflow-hidden group">
+    <div className="jarvis-glass-naked p-4 flex flex-col gap-2 hover:border-primary transition-all duration-300 relative overflow-hidden group laser-scan">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent -translate-y-full group-hover:animate-[scan_2s_ease-in-out_infinite]"></div>
 
       <div className="flex justify-between items-start z-10">

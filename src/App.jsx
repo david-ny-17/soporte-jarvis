@@ -2,6 +2,8 @@ import { useState } from 'react';
 import SolicitudForm from './components/SolicitudForm';
 import ListaSolicitudes from './components/ListaSolicitudes';
 import FiltrosSolicitudes from './components/FiltrosSolicitudes';
+import HudLateral from './components/HudLateral';
+import HudBackground from './components/HudBackground';
 
 function App() {
   
@@ -38,34 +40,39 @@ function App() {
   });
 
   return (
-    <div className="min-h-screen p-4 md:p-8 max-w-7xl mx-auto">
-      {/* Cabecera J.A.R.V.I.S */}
-      <header className="mb-10 text-center">
-        <h1 className="text-3xl md:text-5xl font-bold text-primary jarvis-glow uppercase tracking-widest">
-          J.A.R.V.I.S. Protocol
-        </h1>
-        <p className="text-muted-foreground mt-2 tracking-widest text-sm md:text-base">
-          SISTEMA DE GESTIÓN DE SOPORTE TÉCNICO
-        </p>
-      </header>
+    <div className="min-h-screen relative overflow-hidden bg-black-void font-mono text-primary flex py-6">
+      
+      {/* EL FONDO HUD GIGANTE (Z-0) */}
+      <HudBackground />
 
-      {/* Grid de componentes */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-1 space-y-8">
-          {/* Le pasamos la función agregarSolicitud como prop */}
-          <SolicitudForm onAgregar={agregarSolicitud} />
-          
-          {/* Le pasamos el estado del filtro y la función para cambiarlo */}
-          <FiltrosSolicitudes filtroActual={filtro} onCambiarFiltro={cambiarFiltro} />
-        </div>
+      {/* CONTENIDO FUNCIONAL (Z-10, POR ENCIMA DEL FONDO) */}
+      <div className="w-full h-full max-w-[95rem] mx-auto px-4 lg:px-12 z-10 flex flex-col relative pointer-events-none">
         
-        <div className="lg:col-span-2">
-          {/* Le pasamos la lista FILTRADA y las funciones de acción */}
-          <ListaSolicitudes
-            solicitudes={solicitudesFiltradas} 
-            onActualizar={actualizarEstado}
-            onEliminar={eliminarSolicitud}
-          />
+        {/* Cabecera pequeña (ya no es el centro de atención) */}
+        <header className="mb-8 text-center sm:text-left sm:ml-40 lg:ml-60 pointer-events-auto">
+          <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-primary uppercase tracking-[0.5em]">
+            J.A.R.V.I.S. SYSTEM
+          </h1>
+        </header>
+
+        {/* Layout modificado para respetar el gran centro vacío */}
+        <div className="flex-1 flex flex-col lg:flex-row justify-between items-start gap-8 pointer-events-none">
+          
+          {/* COLUMNA IZQUIERDA (Formulario y Filtros) */}
+          <div className="w-full lg:w-[350px] space-y-6 mt-32 xl:mt-40 pointer-events-auto">
+            <SolicitudForm onAgregar={agregarSolicitud} />
+            <FiltrosSolicitudes filtroActual={filtro} onCambiarFiltro={cambiarFiltro} />
+          </div>
+          
+          {/* COLUMNA DERECHA (Lista de Solicitudes) */}
+          <div className="w-full lg:w-[500px] mt-20 xl:mt-10 pointer-events-auto">
+            <ListaSolicitudes
+              solicitudes={solicitudesFiltradas}
+              onActualizar={actualizarEstado}
+              onEliminar={eliminarSolicitud}
+            />
+          </div>
+
         </div>
       </div>
     </div>
