@@ -22,8 +22,14 @@ function App() {
     
     setSolicitudes([...solicitudes, solicitudCompleta]);
   };
-  const actualizarEstado = (id, nuevoEstado) => console.log('Actualizar:', id, nuevoEstado);
-  const eliminarSolicitud = (id) => console.log('Eliminar:', id);
+  const actualizarEstado = (id, nuevoEstado) => {
+    setSolicitudes(solicitudes.map(solicitud => 
+      solicitud.id === id ? { ...solicitud, estado: nuevoEstado } : solicitud
+    ));
+  };
+  const eliminarSolicitud = (id) => {
+    setSolicitudes(solicitudes.filter(solicitud => solicitud.id !== id));
+  };
   const cambiarFiltro = (nuevoFiltro) => setFiltro(nuevoFiltro);
 
   return (
