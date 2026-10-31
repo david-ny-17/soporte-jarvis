@@ -1,122 +1,55 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import SolicitudForm from './components/SolicitudForm';
+import ListaSolicitudes from './components/ListaSolicitudes';
+import FiltrosSolicitudes from './components/FiltrosSolicitudes';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // ESTADO PADRE: Aquí guardamos las solicitudes y el filtro actual
+  const [solicitudes, setSolicitudes] = useState([
+    { id: 1, titulo: 'Falla en servidor principal', descripcion: 'El núcleo de procesamiento no responde al ping.', solicitante: 'Tony Stark', prioridad: 'alta', estado: 'pendiente' },
+    { id: 2, titulo: 'Actualización de software', descripcion: 'Calibrar los propulsores de la armadura Mark V.', solicitante: 'Pepper Potts', prioridad: 'media', estado: 'en proceso' }
+  ]);
+  const [filtro, setFiltro] = useState('todas');
+
+  // Funciones que se pasarán por PROPS a los hijos (se programarán en próximos pasos)
+  const agregarSolicitud = (nuevaSolicitud) => console.log('Agregar:', nuevaSolicitud);
+  const actualizarEstado = (id, nuevoEstado) => console.log('Actualizar:', id, nuevoEstado);
+  const eliminarSolicitud = (id) => console.log('Eliminar:', id);
+  const cambiarFiltro = (nuevoFiltro) => setFiltro(nuevoFiltro);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen p-4 md:p-8 max-w-7xl mx-auto">
+      {/* Cabecera J.A.R.V.I.S */}
+      <header className="mb-10 text-center">
+        <h1 className="text-3xl md:text-5xl font-bold text-primary jarvis-glow uppercase tracking-widest">
+          J.A.R.V.I.S. Protocol
+        </h1>
+        <p className="text-muted-foreground mt-2 tracking-widest text-sm md:text-base">
+          SISTEMA DE GESTIÓN DE SOPORTE TÉCNICO
+        </p>
+      </header>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      {/* Grid de componentes */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-1 space-y-8">
+          {/* Le pasamos la función agregarSolicitud como prop */}
+          <SolicitudForm onAgregar={agregarSolicitud} />
+          
+          {/* Le pasamos el estado del filtro y la función para cambiarlo */}
+          <FiltrosSolicitudes filtroActual={filtro} onCambiarFiltro={cambiarFiltro} />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+        
+        <div className="lg:col-span-2">
+          {/* Le pasamos la lista de datos y las funciones de acción */}
+          <ListaSolicitudes
+            solicitudes={solicitudes}
+            onActualizar={actualizarEstado}
+            onEliminar={eliminarSolicitud}
+          />
         </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
