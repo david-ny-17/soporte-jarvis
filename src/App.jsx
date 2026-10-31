@@ -4,15 +4,24 @@ import ListaSolicitudes from './components/ListaSolicitudes';
 import FiltrosSolicitudes from './components/FiltrosSolicitudes';
 
 function App() {
-  // ESTADO PADRE: Aquí guardamos las solicitudes y el filtro actual
+  
   const [solicitudes, setSolicitudes] = useState([
     { id: 1, titulo: 'Falla en servidor principal', descripcion: 'El núcleo de procesamiento no responde al ping.', solicitante: 'Tony Stark', prioridad: 'alta', estado: 'pendiente' },
     { id: 2, titulo: 'Actualización de software', descripcion: 'Calibrar los propulsores de la armadura Mark V.', solicitante: 'Pepper Potts', prioridad: 'media', estado: 'en proceso' }
   ]);
   const [filtro, setFiltro] = useState('todas');
 
-  // Funciones que se pasarán por PROPS a los hijos (se programarán en próximos pasos)
-  const agregarSolicitud = (nuevaSolicitud) => console.log('Agregar:', nuevaSolicitud);
+  
+  const agregarSolicitud = (nuevaSolicitud) => {
+    const solicitudCompleta = {
+      ...nuevaSolicitud,
+      id: Date.now(), 
+      estado: 'pendiente' 
+    };
+    
+    
+    setSolicitudes([...solicitudes, solicitudCompleta]);
+  };
   const actualizarEstado = (id, nuevoEstado) => console.log('Actualizar:', id, nuevoEstado);
   const eliminarSolicitud = (id) => console.log('Eliminar:', id);
   const cambiarFiltro = (nuevoFiltro) => setFiltro(nuevoFiltro);
